@@ -18,16 +18,28 @@ function App() {
     }
     else if(id === '='){
       //Produce result
+      handleSubmit()
     }
     else{
       setValue((val)=> val+id)
     }
   }
 
+  const handleSubmit = (e) => {
+    e?.preventDefault();
+    try {
+      const ans = eval(value);
+      setValue(ans.toString());
+    } catch {
+      alert('Invalid input');
+      setValue('');
+    }
+  }
+
   return (
     <div className='App'>
       <h1>Calculator</h1>
-      <form>
+      <form onSubmit={handleSubmit} >
         <input type='text' onChange={handleChange} value={value}/>
       </form>
       <div className='container' onClick={handleClick}>
